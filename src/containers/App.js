@@ -21,6 +21,7 @@ class App extends Component {
 
 
       <div className="App">
+        <link href="https://fonts.googleapis.com/css?family=Share+Tech+Mono" rel="stylesheet"/>
         <Particles className="particles" params={{
           particles: {
             "number":{

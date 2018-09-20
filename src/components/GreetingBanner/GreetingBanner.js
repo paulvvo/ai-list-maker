@@ -1,10 +1,10 @@
 import React,{Component} from "react";
-
+import "./GreetingBanner.css";
 class GreetingBanner extends Component{
   render(){
     return(
       <div>
-        <h1>{`Hello User, Welcome to the home`}</h1>
+        <h1 className="mainGreeting">{`Hello User, What Would You Like To Track Today?`}</h1>
       </div>
     );
   }
