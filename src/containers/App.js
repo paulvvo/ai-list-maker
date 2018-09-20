@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
 import './App.css';
-import UrlLinkForm from "../components/UrlLinkForm/UrlLinkForm";
+
 import Image from "../components/Image/Image";
+import UrlLinkForm from "../components/UrlLinkForm/UrlLinkForm";
 import GreetingBanner from "../components/GreetingBanner/GreetingBanner";
 
+import Particles from "react-particles-js";
 
 class App extends Component {
   constructor(){
@@ -11,15 +13,27 @@ class App extends Component {
     this.state={
       urlInput: "",
       imageSrc:""
-
     }
   }
 
   render() {
     return (
+
+
       <div className="App">
+        <Particles className="particles" params={{
+          particles: {
+            "number":{
+              "value":40,
+              "density":{
+                "enable":true,"value_area":800
+              }
+            }
+          }
+        }}/>
         <GreetingBanner/>
         <UrlLinkForm onUrlLinkChange={this.onUrlLinkChange} onUrlSubmit={this.onUrlSubmit}/>
+        <Image imageSrc={this.state.imageSrc}/>
         <Image imageSrc={this.state.imageSrc}/>
       </div>
     );
