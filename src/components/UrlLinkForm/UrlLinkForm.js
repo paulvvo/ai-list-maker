@@ -5,8 +5,12 @@ class UrlLinkForm extends Component {
   render(){
     return(
       <div>
-        <input  className="urlInput" type="text" name="url" placeholder="enter in your url" onChange={this.props.onUrlLinkChange}/>
-        <button type="submit" onClick={this.props.onUrlSubmit}>Analyze</button>
+        <div >
+          <input className="urlInput" type="text" name="url" placeholder="Give me an image link human..." onChange={this.props.onUrlLinkChange}/>
+        </div>
+        <div >
+          <button className="urlSubmitButton" type="submit" onClick={this.props.onUrlSubmit}>Analyze</button>
+        </div>
       </div>
     );
   }

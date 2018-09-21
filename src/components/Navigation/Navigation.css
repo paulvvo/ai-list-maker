@@ -1,0 +1,19 @@
+.navigationBar{
+  display:flex;
+  justify-content:flex-end;
+}
+
+.navigationBar p{
+  color:white;
+  margin:7px;
+  padding:10px;
+  width: 7%;
+  /* border-right: 2px solid white;
+  border-bottom: 2px solid white; */
+  border-radius:15px;
+  box-shadow: 10px 10px 59px 1px rgba(255,255,255,0.5);
+  user-select: none;
+}
+.navigationBar p:hover{
+  background-color: rgba(255,255,255,0.4)
+}

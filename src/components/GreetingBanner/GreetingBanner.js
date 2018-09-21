@@ -4,7 +4,7 @@ class GreetingBanner extends Component{
   render(){
     return(
       <div>
-        <h1 className="mainGreeting">{`Hello User, What Would You Like To Track Today?`}</h1>
+        <h1 className="mainGreeting">{`Hello Human, What Would You Like To Track Today?`}</h1>
       </div>
     );
   }
