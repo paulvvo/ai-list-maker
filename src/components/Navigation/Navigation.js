@@ -1,12 +1,21 @@
 import React,{Component} from "react";
 import "./Navigation.css";
 class Navigation extends Component{
+
   render(){
+    // console.log(this.props.route);
     return(
       <div className="navigationBar">
-        <p>Sign In</p>
-        <p>Sign Up</p>
-        <p>Sign Out</p>
+        {
+          this.props.route ==="home"
+          ?<div className="signedInNavBar">
+            <p onClick={()=>this.props.onRouteChange("login")}>Sign out</p>
+          </div>
+          :<div className="signedOutNavBar">
+            <p onClick={()=>this.props.onRouteChange("login")}>Login</p>
+            <p onClick={()=>this.props.onRouteChange("register")}>Sign up</p>
+          </div>
+        }
       </div>
     );
   }

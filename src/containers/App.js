@@ -2,10 +2,13 @@ import React, { Component } from 'react';
 import './App.css';
 
 import Image from "../components/Image/Image";
+import SignIn from "../components/SignIn/SignIn";
+import Register from "../components/Register/Register";
 import UrlLinkForm from "../components/UrlLinkForm/UrlLinkForm";
 import GreetingBanner from "../components/GreetingBanner/GreetingBanner";
 import Navigation from "../components/Navigation/Navigation";
 import ItemsList from "../components/ItemsList/ItemsList";
+
 import Particles from "react-particles-js";
 import Clarifai from "clarifai";
 
@@ -21,7 +24,8 @@ class App extends Component {
     this.state={
       urlInput: "",
       imageSrc:"",
-      detectedItems:[]
+      detectedItems:[],
+      route:""
     }
   }
 
@@ -32,19 +36,41 @@ class App extends Component {
         <Particles className="particles" params={{
           particles: {
             "number":{
-              "value":40,
+              "value":80,
               "density":{
                 "enable":true,"value_area":800
               }
             }
           }
         }}/>
-        <Navigation/>
-        <GreetingBanner/>
-        <UrlLinkForm onUrlLinkChange={this.onUrlLinkChange} onUrlSubmit={this.onUrlSubmit}/>
-        <Image imageSrc={this.state.imageSrc}/>
-        <Image imageSrc={this.state.imageSrc}/>
-        <ItemsList detectedItems={this.state.detectedItems}/>
+        <Navigation onRouteChange={this.onRouteChange} route={this.state.route}/>
+        {
+          this.state.route === "home"
+          ?<div>
+            <GreetingBanner/>
+            <UrlLinkForm onUrlLinkChange={this.onUrlLinkChange} onUrlSubmit={this.onUrlSubmit}/>
+            <Image imageSrc={this.state.imageSrc}/>
+            <Image imageSrc={this.state.imageSrc}/>
+            <ItemsList detectedItems={this.state.detectedItems}/>
+          </div>
+          :this.state.route === "register"
+          ?<Register onRouteChange={this.onRouteChange} />
+          :<SignIn onRouteChange={this.onRouteChange} />
+
+          // this.state.route === "login"
+          // ?<SignIn onRouteChange={this.onRouteChange}/>
+          // :this.state.route === "register"
+          // ?<Register onRouteChange={this.onRouteChange}/>
+          // :<div>
+          //   <GreetingBanner/>
+          //   <UrlLinkForm onUrlLinkChange={this.onUrlLinkChange} onUrlSubmit={this.onUrlSubmit}/>
+          //   <Image imageSrc={this.state.imageSrc}/>
+          //   <Image imageSrc={this.state.imageSrc}/>
+          //   <ItemsList detectedItems={this.state.detectedItems}/>
+          // </div>
+        }
+
+
       </div>
     );
   }
@@ -64,8 +90,13 @@ class App extends Component {
       // console.log(response.outputs[0].data.concepts[0].name);
       this.setState({detectedItems:response.outputs[0].data.concepts})
     });
-
   }
+
+  onRouteChange = (route)=>{
+    //console.log(route);
+    this.setState({route:route});
+  }
+
 }
 
 export default App;

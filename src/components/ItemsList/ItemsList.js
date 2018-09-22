@@ -4,7 +4,7 @@ import "./ItemsList.css"
 class ItemsList extends Component{
 
   render(){
-    console.log(this.props.detectedItems);
+    //console.log(this.props.detectedItems);
 
     if(this.props.detectedItems.length > 0){
       return(

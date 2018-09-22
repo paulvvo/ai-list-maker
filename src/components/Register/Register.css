@@ -1,0 +1,8 @@
+.registerForm{
+  font-family: 'Share Tech Mono', monospace;
+  border: 1px solid black;
+  max-width: 350px;
+  min-width: 300px;
+  margin: 5% auto 0 auto;
+  background-color: rgba(255,255,255,0.3);
+}
