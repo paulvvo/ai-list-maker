@@ -49,25 +49,16 @@ class App extends Component {
           ?<div>
             <GreetingBanner/>
             <UrlLinkForm onUrlLinkChange={this.onUrlLinkChange} onUrlSubmit={this.onUrlSubmit}/>
-            <Image imageSrc={this.state.imageSrc}/>
-            <Image imageSrc={this.state.imageSrc}/>
-            <ItemsList detectedItems={this.state.detectedItems}/>
+            <div className="inline">
+              <Image imageSrc={this.state.imageSrc}/>
+              <ItemsList detectedItems={this.state.detectedItems}/>
+            </div>
+
           </div>
           :this.state.route === "register"
           ?<Register onRouteChange={this.onRouteChange} />
           :<SignIn onRouteChange={this.onRouteChange} />
 
-          // this.state.route === "login"
-          // ?<SignIn onRouteChange={this.onRouteChange}/>
-          // :this.state.route === "register"
-          // ?<Register onRouteChange={this.onRouteChange}/>
-          // :<div>
-          //   <GreetingBanner/>
-          //   <UrlLinkForm onUrlLinkChange={this.onUrlLinkChange} onUrlSubmit={this.onUrlSubmit}/>
-          //   <Image imageSrc={this.state.imageSrc}/>
-          //   <Image imageSrc={this.state.imageSrc}/>
-          //   <ItemsList detectedItems={this.state.detectedItems}/>
-          // </div>
         }
 
 

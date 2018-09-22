@@ -26,3 +26,10 @@
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
 }
+
+.inline{
+  display:flex;
+  flex-wrap: wrap;
+  margin-top: 30px;
+  justify-content: center;
+}

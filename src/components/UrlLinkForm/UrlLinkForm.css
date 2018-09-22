@@ -20,6 +20,10 @@
   outline-width: 0;
   height:30px;
 }
+.urlSubmitButton:hover{
+  background-color:rgba(9,43,153,0.9);
+  cursor:pointer;
+}
 
 ::placeholder {
   color: rgba(255,255,255,0.6);

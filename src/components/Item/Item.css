@@ -1,0 +1,29 @@
+li{
+  user-select: none;
+  font-family: 'Share Tech Mono', monospace;
+}
+li:hover{
+  background-color: rgba(0,0,0,0.5);
+  color:white;
+  cursor: pointer;
+  border-radius: 12px;
+}
+.deleteIcon{
+  color:red;
+  font-size: 30px;
+  display:none;
+
+}
+.deleteIcon:hover{
+  background-color:rgba(255,0,0,0.5);
+  display:inline-block;
+  border-radius: 15px;
+}
+
+li:hover .deleteIcon{
+  display:inline-block;
+}
+
+.disappear{
+  display:none;
+}
