@@ -25,10 +25,16 @@ class App extends Component {
       urlInput: "",
       imageSrc:"",
       detectedItems:[],
+      itemInput:"",
       route:""
     }
   }
 
+  componentDidMount(){
+    fetch("http://localhost:3000")
+    .then(response => response.json())
+    .then(console.log);
+  }
   render() {
     return (
       <div className="App">
@@ -51,7 +57,12 @@ class App extends Component {
             <UrlLinkForm onUrlLinkChange={this.onUrlLinkChange} onUrlSubmit={this.onUrlSubmit}/>
             <div className="inline">
               <Image imageSrc={this.state.imageSrc}/>
-              <ItemsList detectedItems={this.state.detectedItems}/>
+              <ItemsList
+              onItemInputChange={this.onItemInputChange}
+              onDetectedItemsModify = {this.onDetectedItemsModify}
+              detectedItems={this.state.detectedItems}
+              itemInput = {this.state.itemInput}
+              onItemInputSubmit = {this.onItemInputSubmit}/>
             </div>
 
           </div>
@@ -88,6 +99,26 @@ class App extends Component {
     this.setState({route:route});
   }
 
+  onDetectedItemsModify= (i)=>{
+    this.state.detectedItems.splice(i,1);
+    const newArr = this.state.detectedItems
+    // console.log(newArr);
+    this.setState({detectedItems: newArr});
+  }
+
+  onItemInputChange = (event) =>{
+    //console.log(event.target.value);
+    this.setState({itemInput: event.target.value});
+  }
+
+  onItemInputSubmit = (event) =>{
+    if(event.key === "Enter"){
+      const newList = this.state.detectedItems;
+      newList.push({name:event.target.value});
+      this.setState({detectedItems: newList});
+      this.setState({itemInput: ""});
+    }
+  }
 }
 
 export default App;
