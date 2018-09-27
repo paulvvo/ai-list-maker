@@ -34,6 +34,7 @@ class App extends Component {
     fetch("http://localhost:3000")
     .then(response => response.json())
     .then(console.log);
+
   }
   render() {
     return (
@@ -59,7 +60,7 @@ class App extends Component {
               <Image imageSrc={this.state.imageSrc}/>
               <ItemsList
               onItemInputChange={this.onItemInputChange}
-              onDetectedItemsModify = {this.onDetectedItemsModify}
+              onDetectedItemsDelete = {this.onDetectedItemsDelete}
               detectedItems={this.state.detectedItems}
               itemInput = {this.state.itemInput}
               onItemInputSubmit = {this.onItemInputSubmit}/>
@@ -99,7 +100,7 @@ class App extends Component {
     this.setState({route:route});
   }
 
-  onDetectedItemsModify= (i)=>{
+  onDetectedItemsDelete = (i)=>{
     this.state.detectedItems.splice(i,1);
     const newArr = this.state.detectedItems
     // console.log(newArr);
@@ -112,7 +113,8 @@ class App extends Component {
   }
 
   onItemInputSubmit = (event) =>{
-    if(event.key === "Enter"){
+
+    if(event.key === "Enter" && event.target.value){
       const newList = this.state.detectedItems;
       newList.push({name:event.target.value});
       this.setState({detectedItems: newList});

@@ -1,5 +1,4 @@
 import React,{Component} from "react";
-//import Item from "../Item/Item.js";
 import "./ItemsList.css"
 class ItemsList extends Component{
 
@@ -15,7 +14,7 @@ class ItemsList extends Component{
           {
 
             this.props.detectedItems.map((item, i) =>{
-              return <li><span onClick={()=>this.props.onDetectedItemsModify(i)}className="deleteIcon">X</span>{item.name}{i}</li>
+              return <li><span onClick={()=>this.props.onDetectedItemsDelete(i)} className="deleteIcon">X</span>{item.name}{i}</li>
             })
           }
 
@@ -26,7 +25,8 @@ class ItemsList extends Component{
           placeholder="Did I Miss An Item?"
           value={this.props.itemInput}
           onChange={this.props.onItemInputChange}
-          onKeyPress={this.props.onItemInputSubmit} />
+          onKeyPress={this.props.onItemInputSubmit}
+          required />
 
         </div>
       )

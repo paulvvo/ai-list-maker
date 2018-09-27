@@ -2,6 +2,15 @@ import React, {Component} from "react";
 import "./SignIn.css";
 
 class SignIn extends Component{
+
+  constructor(){
+    super();
+    this.state={
+      emailInput:"",
+      passwordInput:""
+    }
+  }
+
   render(){
     return(
       <div className="signInForm">
@@ -11,11 +20,19 @@ class SignIn extends Component{
               <legend className="f4 fw6 ph0 mh0">Sign In</legend>
               <div className="mt3">
                 <label className="db fw6 lh-copy f6" htmlFor="email-address">Email</label>
-                <input className="pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100" type="email" name="email-address" />
+                <input
+                className="pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100"
+                type="email"
+                name="email-address"
+                onChange ={this.onEmailChange} />
               </div>
               <div className="mv3">
                 <label className="db fw6 lh-copy f6" htmlFor="password">Password</label>
-                <input className="b pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100" type="password" name="password" />
+                <input
+                className="b pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100"
+                type="password"
+                name="password"
+                onChange={this.onPasswordChange} />
               </div>
 
             </fieldset>
@@ -24,7 +41,7 @@ class SignIn extends Component{
               className="b ph3 pv2 input-reset ba b--black bg-transparent grow pointer f6 dib"
               type="submit"
               value="Sign in"
-              onClick={()=>this.props.onRouteChange("home")}/>
+              onClick={this.onSignInSubmit}/>
             </div>
             <div className="lh-copy mt3">
               <a href="#0" className="f6 link dim black db" onClick={()=>this.props.onRouteChange("register")}>Sign up</a>
@@ -34,6 +51,33 @@ class SignIn extends Component{
       </div>
     )
   }
+  onEmailChange = (event) =>{
+    // console.log(event.target.value);
+    this.setState({emailInput:event.target.value});
+  }
+  onPasswordChange = (event) =>{
+     //console.log(event.target.value);
+    this.setState({passwordInput:event.target.value});
+  }
+
+  onSignInSubmit = (event) =>{
+    console.log(this.state.emailInput);
+    console.log(this.state.passwordInput);
+    fetch("http://localhost:3000/signin",{
+      method:"post",
+      headers: {"Content-Type": "application/json"},
+      body: JSON.stringify({
+        email:this.state.emailInput,
+        password:this.state.passwordInput
+      })
+    })
+    .then(response => response.json())
+    .then(console.log);
+  }
+
+
+  
 }
+//()=>this.props.onRouteChange("home")
 
 export default SignIn;
