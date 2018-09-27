@@ -32,7 +32,8 @@ class SignIn extends Component{
                 className="b pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100"
                 type="password"
                 name="password"
-                onChange={this.onPasswordChange} />
+                onChange={this.onPasswordChange}
+                onKeyPress={this.onPasswordChange} />
               </div>
 
             </fieldset>
@@ -54,10 +55,14 @@ class SignIn extends Component{
   onEmailChange = (event) =>{
     // console.log(event.target.value);
     this.setState({emailInput:event.target.value});
+
   }
   onPasswordChange = (event) =>{
-     //console.log(event.target.value);
+    //console.log(event.target.value);
     this.setState({passwordInput:event.target.value});
+    if(event.key === "Enter"){
+      this.onSignInSubmit();
+    }
   }
 
   onSignInSubmit = (event) =>{
