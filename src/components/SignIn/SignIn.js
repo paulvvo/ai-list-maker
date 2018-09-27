@@ -77,7 +77,8 @@ class SignIn extends Component{
         this.props.onRouteChange("home");
         this.props.loadCurrentUser(user);
       }
-    });
+    })
+    .catch(err => console.log("Check Email and Password"));
   }
 
 

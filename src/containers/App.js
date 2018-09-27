@@ -64,7 +64,7 @@ class App extends Component {
 
           </div>
           :this.state.route === "register"
-          ?<Register onRouteChange={this.onRouteChange} />
+          ?<Register onRouteChange={this.onRouteChange} loadCurrentUser={this.loadCurrentUser} />
           :<SignIn onRouteChange={this.onRouteChange} loadCurrentUser={this.loadCurrentUser} />
 
         }

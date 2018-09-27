@@ -5,16 +5,16 @@ class ItemsList extends Component{
   render(){
     //console.log(this.props.detectedItems);
     //console.log(this.props.key); key isn't a prop
+    const {detectedItems, onDetectedItemsDelete, itemInput, onItemInputChange, onItemInputSubmit} = this.props;
 
-
-    if(this.props.detectedItems.length > 0){
+    if(detectedItems.length > 0){
 
       return(
         <div className="itemsListContainer">
           {
 
-            this.props.detectedItems.map((item, i) =>{
-              return <li><span onClick={()=>this.props.onDetectedItemsDelete(i)} className="deleteIcon">X</span>{item.name}{i}</li>
+            detectedItems.map((item, i) =>{
+              return <li><span onClick={()=>onDetectedItemsDelete(i)} className="deleteIcon">X</span>{item.name}{i}</li>
             })
           }
 
@@ -22,10 +22,10 @@ class ItemsList extends Component{
           id="newItemInput"
           name="newListItem"
           type="text"
-          placeholder="Did I Miss An Item?"
-          value={this.props.itemInput}
-          onChange={this.props.onItemInputChange}
-          onKeyPress={this.props.onItemInputSubmit}
+          placeholder="Missed An Item? Add Here"
+          value={itemInput}
+          onChange={onItemInputChange}
+          onKeyPress={onItemInputSubmit}
           required />
 
         </div>
@@ -34,31 +34,5 @@ class ItemsList extends Component{
     }else{return <div></div>}
   }
 
-
-
 }
 export default ItemsList;
-
-
-//
-// onDeleteItemClick = (index) =>{
-//   console.log(index, "clicked the x");
-//   console.log(this.props.detectedItems);
-//
-//   const li = document.getElementsByTagName("li");
-//   li[index].parentNode.removeChild(li[index]);
-// }
-
-
-// this.props.detectedItems.map((item, i) => {
-//   return (
-//     <li>
-//       <span onClick={() =>{
-//         this.onDeleteItemClick(i)
-//         this.props.onDetectedItemsModify(i)
-//       }} className="deleteIcon">X</span>
-//       {item.name}
-//       {i}
-//     </li>
-//   )
-// })
