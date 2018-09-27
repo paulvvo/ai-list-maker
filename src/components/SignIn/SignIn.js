@@ -61,8 +61,8 @@ class SignIn extends Component{
   }
 
   onSignInSubmit = (event) =>{
-    console.log(this.state.emailInput);
-    console.log(this.state.passwordInput);
+    // console.log(this.state.emailInput);
+    // console.log(this.state.passwordInput);
     fetch("http://localhost:3000/signin",{
       method:"post",
       headers: {"Content-Type": "application/json"},
@@ -72,11 +72,16 @@ class SignIn extends Component{
       })
     })
     .then(response => response.json())
-    .then(console.log);
+    .then(user => {
+      if(user.id){
+        this.props.onRouteChange("home");
+        this.props.loadCurrentUser(user);
+      }
+    });
   }
 
 
-  
+
 }
 //()=>this.props.onRouteChange("home")
 

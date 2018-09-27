@@ -10,22 +10,18 @@ import Navigation from "../components/Navigation/Navigation";
 import ItemsList from "../components/ItemsList/ItemsList";
 
 import Particles from "react-particles-js";
-import Clarifai from "clarifai";
-
-const clarifaiApp = new Clarifai.App({
- apiKey: 'd4ccf75959a54619b16a900eab3667e7'
-});
-
 
 
 class App extends Component {
   constructor(){
     super();
     this.state={
+      name:"",
       urlInput: "",
       imageSrc:"",
       detectedItems:[],
       itemInput:"",
+      currentUser:{},
       route:""
     }
   }
@@ -54,7 +50,7 @@ class App extends Component {
         {
           this.state.route === "home"
           ?<div>
-            <GreetingBanner/>
+            <GreetingBanner name={this.state.name}/>
             <UrlLinkForm onUrlLinkChange={this.onUrlLinkChange} onUrlSubmit={this.onUrlSubmit}/>
             <div className="inline">
               <Image imageSrc={this.state.imageSrc}/>
@@ -69,7 +65,7 @@ class App extends Component {
           </div>
           :this.state.route === "register"
           ?<Register onRouteChange={this.onRouteChange} />
-          :<SignIn onRouteChange={this.onRouteChange} />
+          :<SignIn onRouteChange={this.onRouteChange} loadCurrentUser={this.loadCurrentUser} />
 
         }
 
@@ -87,39 +83,45 @@ class App extends Component {
     // console.log(this.state.urlInput);
     this.setState({imageSrc:this.state.urlInput});
 
-    clarifaiApp.models
-    .predict("aaa03c23b3724a16a56b629203edc62c", this.state.urlInput)
+    fetch("http://localhost:3000/urlInputAnalyze", {
+      method:"post",
+      headers:{"Content-Type": "application/json"},
+      body:JSON.stringify({
+          urlInput:this.state.urlInput
+      })
+    })
+    .then(response => response.json())
     .then(response => {
-      // console.log(response.outputs[0].data.concepts[0].name);
-      this.setState({detectedItems:response.outputs[0].data.concepts})
+      this.setState({detectedItems:response.outputs[0].data.concepts});
     });
   }
-
   onRouteChange = (route)=>{
     //console.log(route);
     this.setState({route:route});
   }
-
   onDetectedItemsDelete = (i)=>{
     this.state.detectedItems.splice(i,1);
     const newArr = this.state.detectedItems
     // console.log(newArr);
     this.setState({detectedItems: newArr});
   }
-
   onItemInputChange = (event) =>{
     //console.log(event.target.value);
     this.setState({itemInput: event.target.value});
   }
-
   onItemInputSubmit = (event) =>{
-
     if(event.key === "Enter" && event.target.value){
       const newList = this.state.detectedItems;
       newList.push({name:event.target.value});
       this.setState({detectedItems: newList});
       this.setState({itemInput: ""});
     }
+  }
+  loadCurrentUser = (user) =>{
+    // console.log("load current user");
+    // console.log(user);
+    // console.log(user.name);
+    this.setState({name:user.name})
   }
 }
 
