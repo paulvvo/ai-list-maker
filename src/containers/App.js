@@ -12,18 +12,20 @@ import ItemsList from "../components/ItemsList/ItemsList";
 import Particles from "react-particles-js";
 
 
+const initialState = {
+  name:"",
+  urlInput: "",
+  imageSrc:"",
+  detectedItems:[],
+  itemInput:"",
+  currentUser:{},
+  route:""
+}
+
 class App extends Component {
   constructor(){
     super();
-    this.state={
-      name:"",
-      urlInput: "",
-      imageSrc:"",
-      detectedItems:[],
-      itemInput:"",
-      currentUser:{},
-      route:""
-    }
+    this.state = initialState;
   }
 
   componentDidMount(){
@@ -46,7 +48,7 @@ class App extends Component {
             }
           }
         }}/>
-        <Navigation onRouteChange={this.onRouteChange} route={this.state.route}/>
+        <Navigation onSignOut={this.onSignOut} onRouteChange={this.onRouteChange} route={this.state.route}/>
         {
           this.state.route === "home"
           ?<div>
@@ -122,6 +124,10 @@ class App extends Component {
     // console.log(user);
     // console.log(user.name);
     this.setState({name:user.name})
+  }
+  onSignOut = () =>{
+    this.setState(initialState);
+    this.onRouteChange("login");
   }
 }
 

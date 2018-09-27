@@ -9,7 +9,7 @@ class Navigation extends Component{
         {
           this.props.route ==="home"
           ?<div className="signedInNavBar">
-            <p onClick={()=>this.props.onRouteChange("login")}>Sign out</p>
+            <p onClick={this.props.onSignOut}>Sign out</p>
           </div>
           :<div className="signedOutNavBar">
             <p onClick={()=>this.props.onRouteChange("login")}>Login</p>
