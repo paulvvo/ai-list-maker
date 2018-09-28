@@ -13,7 +13,6 @@ import Particles from "react-particles-js";
 
 
 const initialState = {
-  name:"",
   urlInput: "",
   imageSrc:"",
   detectedItems:[],
@@ -52,7 +51,7 @@ class App extends Component {
         {
           this.state.route === "home"
           ?<div>
-            <GreetingBanner name={this.state.name}/>
+            <GreetingBanner currentUser={this.state.currentUser}/>
             <UrlLinkForm onUrlLinkChange={this.onUrlLinkChange} onUrlSubmit={this.onUrlSubmit}/>
             <div className="inline">
               <Image imageSrc={this.state.imageSrc}/>
@@ -89,7 +88,8 @@ class App extends Component {
       method:"post",
       headers:{"Content-Type": "application/json"},
       body:JSON.stringify({
-          urlInput:this.state.urlInput
+          urlInput:this.state.urlInput,
+          email: this.state.currentUser.email
       })
     })
     .then(response => response.json())
@@ -103,9 +103,21 @@ class App extends Component {
   }
   onDetectedItemsDelete = (i)=>{
     this.state.detectedItems.splice(i,1);
-    const newArr = this.state.detectedItems
+    const newArr = this.state.detectedItems;
     // console.log(newArr);
     this.setState({detectedItems: newArr});
+
+
+    fetch("http://localhost:3000/itemList", {
+      method:"put",
+      headers:{"Content-Type": "application/json"},
+      body:JSON.stringify({
+        email: this.state.currentUser.email,
+        detectedItems: newArr
+      })
+    })
+    .then(response => response.json())
+    .then(console.log)
   }
   onItemInputChange = (event) =>{
     //console.log(event.target.value);
@@ -117,13 +129,25 @@ class App extends Component {
       newList.push({name:event.target.value});
       this.setState({detectedItems: newList});
       this.setState({itemInput: ""});
+
+
+      fetch("http://localhost:3000/itemList", {
+        method:"put",
+        headers:{"Content-Type": "application/json"},
+        body:JSON.stringify({
+          email: this.state.currentUser.email,
+          detectedItems: newList
+        })
+      })
+      .then(response => response.json())
+      .then(console.log)
     }
   }
   loadCurrentUser = (user) =>{
-    // console.log("load current user");
-    // console.log(user);
+    console.log(user);
     // console.log(user.name);
-    this.setState({name:user.name})
+    this.setState({currentUser:user});
+
   }
   onSignOut = () =>{
     this.setState(initialState);
