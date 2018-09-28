@@ -147,6 +147,9 @@ class App extends Component {
     console.log(user);
     // console.log(user.name);
     this.setState({currentUser:user});
+    this.setState({urlInput:user.urlinput});
+    this.setState({imageSrc:user.urlinput});
+    this.setState({detectedItems:user.detecteditems})
 
   }
   onSignOut = () =>{
