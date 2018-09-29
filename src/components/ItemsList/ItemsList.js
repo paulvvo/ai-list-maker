@@ -14,7 +14,7 @@ class ItemsList extends Component{
           {
 
             detectedItems.map((item, i) =>{
-              return <li><span onClick={()=>onDetectedItemsDelete(i)} className="deleteIcon">X</span>{item.name}{i}</li>
+              return <li><span onClick={()=>onDetectedItemsDelete(i)} className="deleteIcon">X</span>{i}. {item.name}</li>
             })
           }
 
