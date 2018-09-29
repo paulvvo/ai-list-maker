@@ -27,12 +27,11 @@ class App extends Component {
     this.state = initialState;
   }
 
-  componentDidMount(){
-    fetch("http://localhost:3000")
-    .then(response => response.json())
-    .then(console.log);
-
-  }
+  // componentDidMount(){
+  //   fetch("http://localhost:3000")
+  //   .then(response => response.json())
+  //   .then(console.log);
+  // }
   render() {
     return (
       <div className="App">
@@ -84,7 +83,8 @@ class App extends Component {
     // console.log(this.state.urlInput);
     this.setState({imageSrc:this.state.urlInput});
 
-    fetch("http://localhost:3000/urlInputAnalyze", {
+    // fetch("http://localhost:3000/urlInputAnalyze", {
+    fetch("https://mysterious-bayou-91998.herokuapp.com/urlInputAnalyze", {
       method:"post",
       headers:{"Content-Type": "application/json"},
       body:JSON.stringify({
@@ -108,7 +108,8 @@ class App extends Component {
     this.setState({detectedItems: newArr});
 
 
-    fetch("http://localhost:3000/itemList", {
+    // fetch("http://localhost:3000/itemList", {
+    fetch("https://mysterious-bayou-91998.herokuapp.com/itemList", {
       method:"put",
       headers:{"Content-Type": "application/json"},
       body:JSON.stringify({
@@ -131,7 +132,8 @@ class App extends Component {
       this.setState({itemInput: ""});
 
 
-      fetch("http://localhost:3000/itemList", {
+      // fetch("http://localhost:3000/itemList", {
+      fetch("https://mysterious-bayou-91998.herokuapp.com/itemList", {
         method:"put",
         headers:{"Content-Type": "application/json"},
         body:JSON.stringify({
